@@ -44,7 +44,7 @@ fun SectionHeader(
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.ExtraBold,
+                fontWeight = FontWeight.Black,
                 color = Color(0xFF27251F)
             )
 
@@ -55,7 +55,7 @@ fun SectionHeader(
                 ) {
                     Text(
                         text = actionText,
-                        color = Color(0xFF007A9A), // A blueish link color
+                        color = Color(0xFF007A9A),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     )

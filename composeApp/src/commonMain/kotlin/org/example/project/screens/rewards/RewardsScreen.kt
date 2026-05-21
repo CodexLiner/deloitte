@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import org.example.project.components.DealItemCard
 import org.example.project.components.EndOfListFooter
 import org.example.project.components.FilterChipsRow
+import org.example.project.components.HowItWorksCard
 import org.example.project.components.McdTopAppBar
 import org.example.project.components.PromoBannerCard
 import org.example.project.components.QrCodeCard
@@ -35,19 +36,19 @@ fun RewardsScreen() {
 
     Scaffold(
         topBar = { McdTopAppBar(points = 0) },
-        containerColor = Color(0xFFF1F1F1) // Light gray background
+        containerColor = Color.White
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // QR Code Card
+
             item {
                 QrCodeCard(qrCodeId = "M 756 422")
             }
 
-            // Rewards Section
+
             item {
                 SectionHeader(
                     title = "Rewards",
@@ -65,7 +66,7 @@ fun RewardsScreen() {
                 }
             }
 
-            // Treat Yourself Section
+
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 SectionHeader(
@@ -75,7 +76,7 @@ fun RewardsScreen() {
                 PromoBannerCard()
             }
 
-            // Deals Section
+
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 SectionHeader(title = "Deals")
@@ -86,19 +87,24 @@ fun RewardsScreen() {
                 )
             }
 
-            // Deal Items List
+
             items(MockData.dealItems) { deal ->
                 DealItemCard(item = deal)
             }
 
-            // McDelivery Promo
+
             item {
                 PromoBannerCard(
                     title = "Spend \$35 and get a FREE Quarter Pounder Medium Combo"
                 )
             }
             
-            // Footer
+
+            item {
+                HowItWorksCard()
+            }
+            
+
             item {
                 EndOfListFooter()
             }

@@ -41,7 +41,7 @@ fun DealItemCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(180.dp)
-                    .background(Color(0xFFF9C8D4)) // Light pink/grey placeholder background
+                    .background(Color(0xFFF9C8D4))
             ) {
                 AsyncImage(
                     model = item.imageUrl,
@@ -49,7 +49,7 @@ fun DealItemCard(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
                 )
-                // Price badge
+
                 Box(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)

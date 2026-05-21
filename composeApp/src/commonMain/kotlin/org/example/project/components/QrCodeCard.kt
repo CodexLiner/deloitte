@@ -38,7 +38,7 @@ fun QrCodeCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Box(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-            // Info icon top right
+
             IconButton(
                 onClick = { /* TODO */ },
                 modifier = Modifier.align(Alignment.TopEnd)
@@ -54,7 +54,7 @@ fun QrCodeCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // White box for QR code
+
                 Box(
                     modifier = Modifier
                         .background(Color.White, RoundedCornerShape(8.dp))
@@ -62,9 +62,9 @@ fun QrCodeCard(
                     contentAlignment = Alignment.Center
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        // Dummy QR Image
+
                         AsyncImage(
-                            model = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$qrCodeId",
+                            model = "https:
                             contentDescription = "QR Code",
                             modifier = Modifier.size(150.dp)
                         )

@@ -28,7 +28,7 @@ import coil3.compose.AsyncImage
 @Composable
 fun PromoBannerCard(
     title: String = "Get Triple Points on every purchase via app Order & Pay, for a limited time!",
-    imageUrl: String = "https://s7d1.scene7.com/is/image/mcdonalds/3x_points_promo", // Note: using a placeholder or actual image URL if available
+    imageUrl: String = "https:
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -45,7 +45,7 @@ fun PromoBannerCard(
                     .fillMaxWidth()
                     .height(140.dp)
             ) {
-                // Left side text
+
                 Box(
                     modifier = Modifier
                         .weight(1f)
@@ -61,22 +61,22 @@ fun PromoBannerCard(
                     )
                 }
 
-                // Right side image & button (simulated with a Box)
+
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
                         .background(Color(0xFFFFF2D9))
                 ) {
-                    // For the assignment, we use a placeholder or generic image to represent the promo
+
                     AsyncImage(
-                        model = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Double-Quarter-Pounder-with-Cheese-1:1-1-product-tile-desktop",
+                        model = "https:
                         contentDescription = "Promo Image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
                     )
                     
-                    // Order Now Button (Mocked)
+
                     Surface(
                         color = Color(0xFFFFC72C),
                         shape = RoundedCornerShape(4.dp),
@@ -94,7 +94,7 @@ fun PromoBannerCard(
                     }
                 }
             }
-            // Gradient bottom bar
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -102,9 +102,9 @@ fun PromoBannerCard(
                     .background(
                         brush = Brush.horizontalGradient(
                             colors = listOf(
-                                Color(0xFF8A0051), // Magenta
-                                Color(0xFFDA291C), // Red
-                                Color(0xFFFF6900)  // Orange
+                                Color(0xFF8A0051),
+                                Color(0xFFDA291C),
+                                Color(0xFFFF6900)
                             )
                         )
                     )

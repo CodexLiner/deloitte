@@ -50,7 +50,7 @@ fun McdBottomNavBar(
                     Text(text = label)
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = if (isSelected) Color(0xFFFFC72C) else Color.DarkGray, // Yellow if selected
+                    selectedIconColor = if (isSelected) Color(0xFFFFC72C) else Color.DarkGray,
                     unselectedIconColor = Color.DarkGray,
                     selectedTextColor = Color.Black,
                     unselectedTextColor = Color.DarkGray,

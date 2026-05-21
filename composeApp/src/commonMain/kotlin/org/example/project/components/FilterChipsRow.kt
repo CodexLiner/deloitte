@@ -33,8 +33,8 @@ fun FilterChipsRow(
             val isSelected = option == selectedOption
             Surface(
                 shape = RoundedCornerShape(50),
-                color = if (isSelected) Color(0xFF27251F) else Color.White,
-                border = if (!isSelected) BorderStroke(1.dp, Color.Gray) else null,
+                color = Color.White,
+                border = BorderStroke(1.dp, if (isSelected) Color.Black else Color.LightGray),
                 modifier = Modifier.height(36.dp),
                 onClick = { onOptionSelected(option) }
             ) {
@@ -43,7 +43,7 @@ fun FilterChipsRow(
                 ) {
                     Text(
                         text = option,
-                        color = if (isSelected) Color.White else Color(0xFF27251F),
+                        color = Color(0xFF27251F),
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
                         fontSize = 14.sp
                     )

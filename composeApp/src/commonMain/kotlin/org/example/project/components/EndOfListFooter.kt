@@ -28,9 +28,9 @@ fun EndOfListFooter() {
             .padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Tag Image (mocked)
+
         AsyncImage(
-            model = "https://s7d1.scene7.com/is/image/mcdonalds/reward_tag_icon", // Placeholder
+            model = "https:
             contentDescription = "Tag",
             modifier = Modifier.size(80.dp)
         )
