@@ -28,7 +28,7 @@ import coil3.compose.AsyncImage
 @Composable
 fun PromoBannerCard(
     title: String = "Get Triple Points on every purchase via app Order & Pay, for a limited time!",
-    imageUrl: String = "https:
+    imageUrl: String = "https://s7d1.scene7.com/is/image/mcdonalds/3x_points_promo",
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -70,7 +70,7 @@ fun PromoBannerCard(
                 ) {
 
                     AsyncImage(
-                        model = "https:
+                        model = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Double-Quarter-Pounder-with-Cheese-1:1-1-product-tile-desktop",
                         contentDescription = "Promo Image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()

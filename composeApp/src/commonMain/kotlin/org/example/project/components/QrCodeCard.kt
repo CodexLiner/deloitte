@@ -64,9 +64,11 @@ fun QrCodeCard(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
                         AsyncImage(
-                            model = "https:
+                            model = "https://s7d1.scene7.com/is/image/mcdonalds/qr_code_placeholder",
                             contentDescription = "QR Code",
-                            modifier = Modifier.size(150.dp)
+                            modifier = Modifier
+                                .size(140.dp)
+                                .background(Color.White)
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(

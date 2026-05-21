@@ -1,17 +1,12 @@
 package org.example.project.components
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -25,30 +20,10 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun McdTopAppBar(
-    points: Int = 0,
-    showQrIcon: Boolean = true
+    points: Int = 0
 ) {
     CenterAlignedTopAppBar(
-        title = {
-            if (showQrIcon) {
-
-                Surface(
-                    shape = RoundedCornerShape(4.dp),
-                    color = Color(0xFFFFC72C),
-                    modifier = Modifier.size(36.dp),
-                    onClick = { /* TODO */ }
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Default.QrCode,
-                            contentDescription = "QR Code",
-                            tint = Color.Black,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                }
-            }
-        },
+        title = {},
         navigationIcon = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,

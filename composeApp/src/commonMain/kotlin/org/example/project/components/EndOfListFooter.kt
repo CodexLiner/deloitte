@@ -30,7 +30,7 @@ fun EndOfListFooter() {
     ) {
 
         AsyncImage(
-            model = "https:
+            model = "https://s7d1.scene7.com/is/image/mcdonalds/reward_tag_icon",
             contentDescription = "Tag",
             modifier = Modifier.size(80.dp)
         )
