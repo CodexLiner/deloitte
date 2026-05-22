@@ -23,7 +23,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.domain)
             implementation(projects.data.repository)
             implementation(libs.koin.core)
         }

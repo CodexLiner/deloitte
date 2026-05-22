@@ -26,6 +26,5 @@ include(
     ":composeApp",
     ":common:models",
     ":data:repository",
-    ":domain",
     ":di"
 )
