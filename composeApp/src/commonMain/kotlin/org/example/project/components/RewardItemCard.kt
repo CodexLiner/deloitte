@@ -40,7 +40,6 @@ fun RewardItemCard(
 ) {
     Card(
         modifier = modifier
-            .width(180.dp)
             .height(220.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
@@ -76,6 +75,22 @@ fun RewardItemCard(
                         .size(100.dp)
                         .padding(top = 8.dp)
                 )
+
+                if (!item.isAvailable) {
+                    Surface(
+                        color = Color.Black.copy(alpha = 0.8f),
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier.align(Alignment.Center)
+                    ) {
+                        Text(
+                            text = "Unavailable now",
+                            color = Color.White,
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)
+                        )
+                    }
+                }
 
 
                 Surface(

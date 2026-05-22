@@ -5,7 +5,8 @@ data class RewardItem(
     val name: String,
     val pointsRequired: Int,
     val imageUrl: String,
-    val isLocked: Boolean = true
+    val isLocked: Boolean = true,
+    val isAvailable: Boolean = true
 )
 
 data class DealItem(
@@ -25,12 +26,31 @@ object MockData {
         ),
         RewardItem(
             id = "2",
-            name = "Coca Cola",
+            name = "Hash Brown",
+            pointsRequired = 2500,
+            imageUrl = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Hash-Browns-1:1-1-product-tile-desktop",
+            isAvailable = false
+        ),
+        RewardItem(
+            id = "3",
+            name = "Any Size Soft Drink",
             pointsRequired = 3200,
             imageUrl = "https://pngimg.com/uploads/cocacola/cocacola_PNG4.png"
         ),
         RewardItem(
-            id = "3",
+            id = "4",
+            name = "Hot Apple Pie",
+            pointsRequired = 3800,
+            imageUrl = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Apple-Pie-1:1-1-product-tile-desktop"
+        ),
+        RewardItem(
+            id = "5",
+            name = "Any Size McCafé Hot Beverage",
+            pointsRequired = 4200,
+            imageUrl = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-McCafe-Latte-1:1-1-product-tile-desktop"
+        ),
+        RewardItem(
+            id = "6",
             name = "Large Fries",
             pointsRequired = 4500,
             imageUrl = "https://mcdonalds.com.lb/storage/menu-products/June2025/F6arpVLuIRcUflW6cXY9.png"

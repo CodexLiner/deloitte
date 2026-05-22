@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.example.project.navigation.Screens
+import org.example.project.screens.rewards.AllRewardsScreen
 import org.example.project.screens.rewards.RewardsScreen
 
 @Composable
@@ -18,7 +19,14 @@ fun ProductBrowserApp() {
             startDestination = Screens.RewardsScreen
         ) {
             composable<Screens.RewardsScreen> {
-                RewardsScreen()
+                RewardsScreen(onViewAllRewards = {
+                    navController.navigate(Screens.AllRewardsScreen)
+                })
+            }
+            composable<Screens.AllRewardsScreen> {
+                AllRewardsScreen(onBack = {
+                    navController.popBackStack()
+                })
             }
         }
     }

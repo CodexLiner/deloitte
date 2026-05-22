@@ -6,4 +6,7 @@ sealed interface Screens {
 
     @Serializable
     data object RewardsScreen : Screens
+
+    @Serializable
+    data object AllRewardsScreen : Screens
 }
