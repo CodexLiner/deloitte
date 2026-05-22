@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		5F65FA984C2297887C80D2A8 /* RevestAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RevestAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F65FA984C2297887C80D2A8 /* deloitte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = deloitte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -59,7 +59,7 @@
 		AA518180FA8DB394D0A17918 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5F65FA984C2297887C80D2A8 /* RevestAssignment.app */,
+				5F65FA984C2297887C80D2A8 /* deloitte.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			packageProductDependencies = (
 			);
 			productName = iosApp;
-			productReference = 5F65FA984C2297887C80D2A8 /* RevestAssignment.app */;
+			productReference = 5F65FA984C2297887C80D2A8 /* deloitte.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

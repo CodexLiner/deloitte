@@ -1,4 +1,4 @@
-rootProject.name = "RevestAssignment"
+rootProject.name = "deloitte"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
