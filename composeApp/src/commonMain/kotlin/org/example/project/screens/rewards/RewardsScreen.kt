@@ -66,13 +66,13 @@ fun RewardsScreen(
             McdTopAppBar(
                 points = 0,
                 showQrIcon = showQrInTopBar,
-                onQrClick = { /* Handle QR click */ }
+                onQrClick = { }
             )
         },
         bottomBar = {
             McdBottomNavBar(
                 selectedTab = "Deals",
-                onTabSelected = { /* Handle tab selection */ }
+                onTabSelected = { }
             )
         },
         containerColor = Color.White

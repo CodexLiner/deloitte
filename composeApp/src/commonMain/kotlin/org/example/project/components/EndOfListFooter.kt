@@ -52,7 +52,7 @@ fun EndOfListFooter() {
         
         Spacer(modifier = Modifier.height(24.dp))
         
-        IconButton(onClick = { /* TODO */ }) {
+        IconButton(onClick = { }) {
             Icon(
                 imageVector = Icons.Default.Refresh,
                 contentDescription = "Refresh",
