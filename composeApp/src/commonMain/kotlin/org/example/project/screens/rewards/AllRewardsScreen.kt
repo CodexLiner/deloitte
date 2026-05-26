@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -59,18 +60,29 @@ fun AllRewardsScreen(
                 actions = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(end = 16.dp)
+                        modifier = Modifier.padding(end = 12.dp)
                     ) {
-                        Text(
-                            text = "0 pts",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 16.sp,
-                            color = Color.Black
-                        )
+                        Column(horizontalAlignment = Alignment.End) {
+                            Text(
+                                text = "2450",
+                                fontWeight = FontWeight.Black,
+                                fontSize = 18.sp,
+                                color = Color(0xFF27251F),
+                                lineHeight = 18.sp
+                            )
+                            Text(
+                                text = "pts",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 10.sp,
+                                color = Color.Gray,
+                                lineHeight = 10.sp
+                            )
+                        }
                         Icon(
                             imageVector = Icons.Default.ChevronRight,
-                            contentDescription = "Points",
-                            tint = Color.Black
+                            contentDescription = "Points Details",
+                            tint = Color(0xFF27251F),
+                            modifier = Modifier.size(20.dp)
                         )
                     }
                 },

@@ -2,6 +2,7 @@ package org.example.project.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -32,12 +33,28 @@ fun McdTopAppBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = "My",
+                    color = Color(0xFFDA291C),
+                    fontWeight = FontWeight.Black,
+                    fontSize = 24.sp
+                )
+                Text(
+                    text = "M",
+                    color = Color(0xFFFFC72C),
+                    fontWeight = FontWeight.Black,
+                    fontSize = 32.sp
+                )
+            }
+        },
+        navigationIcon = {
             if (showQrIcon) {
-                IconButton(onClick = onQrClick) {
+                IconButton(onClick = onQrClick, modifier = Modifier.padding(start = 8.dp)) {
                     Box(
                         modifier = Modifier
-                            .size(36.dp)
-                            .background(Color(0xFFFFC72C), RoundedCornerShape(4.dp)),
+                            .size(40.dp)
+                            .background(Color(0xFFFFC72C), RoundedCornerShape(8.dp)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
@@ -50,49 +67,38 @@ fun McdTopAppBar(
                 }
             }
         },
-        navigationIcon = {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 16.dp)
-            ) {
-                Text(
-                    text = "My",
-                    color = Color(0xFFDA291C),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-                Text(
-                    text = "M",
-                    color = Color(0xFFFFC72C),
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 28.sp
-                )
-            }
-        },
         actions = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(end = 8.dp)
+                modifier = Modifier.padding(end = 12.dp)
             ) {
-                Text(
-                    text = "$points pts",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    color = Color(0xFF27251F)
-                )
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        text = "$points",
+                        fontWeight = FontWeight.Black,
+                        fontSize = 18.sp,
+                        color = Color(0xFF27251F),
+                        lineHeight = 18.sp
+                    )
+                    Text(
+                        text = "pts",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 10.sp,
+                        color = Color.Gray,
+                        lineHeight = 10.sp
+                    )
+                }
                 Icon(
                     imageVector = Icons.Default.ChevronRight,
                     contentDescription = "Points Details",
-                    tint = Color(0xFF27251F)
+                    tint = Color(0xFF27251F),
+                    modifier = Modifier.size(20.dp)
                 )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.White,
-            scrolledContainerColor = Color.Unspecified,
-            navigationIconContentColor = Color.Unspecified,
-            titleContentColor = Color.Unspecified,
-            actionIconContentColor = Color.Unspecified
+            scrolledContainerColor = Color.White
         )
     )
 }

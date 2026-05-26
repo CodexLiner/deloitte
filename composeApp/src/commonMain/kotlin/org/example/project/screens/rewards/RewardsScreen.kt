@@ -45,6 +45,7 @@ import org.example.project.components.EndOfListFooter
 import org.example.project.components.FilterChipsRow
 import org.example.project.components.McdBottomNavBar
 import org.example.project.components.McdTopAppBar
+import org.example.project.components.PointsProgressCard
 import org.example.project.components.PromoBannerCard
 import org.example.project.components.QrCodeCard
 import org.example.project.components.RewardItemCard
@@ -62,14 +63,14 @@ fun RewardsScreen(
     
     val showQrInTopBar by remember {
         derivedStateOf {
-            listState.firstVisibleItemIndex > 0
+            listState.firstVisibleItemIndex > 1
         }
     }
 
     Scaffold(
         topBar = {
             McdTopAppBar(
-                points = 0,
+                points = 2450,
                 showQrIcon = showQrInTopBar,
                 onQrClick = { }
             )
@@ -89,12 +90,16 @@ fun RewardsScreen(
                 .padding(paddingValues)
         ) {
             item {
+                PointsProgressCard(currentPoints = 2450)
+            }
+
+            item {
                 QrCodeCard(qrCodeId = "M 756 422")
             }
 
             item {
                 SectionHeader(
-                    title = "Rewards",
+                    title = "Redeem for points",
                     actionText = "View all",
                     onActionClick = onViewAllRewards
                 )
@@ -148,17 +153,14 @@ fun RewardsScreen(
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 SectionHeader(
-                    title = "Treat yourself",
+                    title = "Exclusive Deals",
                     subtitle = "Enjoy even more ways to earn points and get items you love."
                 )
-                PromoBannerCard()
             }
 
             item {
-                Spacer(modifier = Modifier.height(16.dp))
-                SectionHeader(title = "Deals")
                 FilterChipsRow(
-                    options = listOf("Deals", "McCafe Deals"),
+                    options = listOf("All", "McCafe", "Lunch", "Dinner"),
                     selectedOption = selectedFilter,
                     onOptionSelected = { selectedFilter = it }
                 )
@@ -169,6 +171,11 @@ fun RewardsScreen(
                     val dealJson = Json.encodeToString(it)
                     navController.navigate(Screens.StackDetails(dealJson))
                 }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+                PromoBannerCard()
             }
 
             item {

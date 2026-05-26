@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -104,6 +107,7 @@ fun RewardDetailScreen(data: DealItem, navController: NavHostController) {
                             onClick = { /* Add to order */ },
                             modifier = Modifier
                                 .weight(1.2f)
+                                .navigationBarsPadding()
                                 .height(56.dp),
                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFC72C)),
                             shape = RoundedCornerShape(8.dp)
