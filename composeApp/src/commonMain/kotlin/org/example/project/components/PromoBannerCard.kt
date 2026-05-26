@@ -45,7 +45,6 @@ fun PromoBannerCard(
                     .fillMaxWidth()
                     .height(140.dp)
             ) {
-
                 Box(
                     modifier = Modifier
                         .weight(1f)
@@ -61,21 +60,18 @@ fun PromoBannerCard(
                     )
                 }
 
-
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
                         .background(Color(0xFFFFF2D9))
                 ) {
-
                     AsyncImage(
                         model = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Double-Quarter-Pounder-with-Cheese-1:1-1-product-tile-desktop",
                         contentDescription = "Promo Image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
                     )
-                    
 
                     Surface(
                         color = Color(0xFFFFC72C),

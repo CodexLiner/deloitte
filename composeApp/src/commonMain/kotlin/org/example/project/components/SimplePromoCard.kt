@@ -46,7 +46,7 @@ fun SimplePromoCard(
                 AsyncImage(
                     model = imageUrl,
                     contentDescription = title,
-                    contentScale = if (isYellow) ContentScale.Fit else ContentScale.Crop,
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize().padding(if (isYellow) 16.dp else 0.dp)
                 )
             }

@@ -9,7 +9,8 @@ data class RewardItem(
     val pointsRequired: Int,
     val imageUrl: String,
     val isLocked: Boolean = true,
-    val isAvailable: Boolean = true
+    val isAvailable: Boolean = true,
+    val isLimitedTime: Boolean = false
 )
 
 @Serializable
@@ -27,7 +28,8 @@ object MockData {
             id = "1",
             name = "McFlurry",
             pointsRequired = 6800,
-            imageUrl = "https://pngimg.com/uploads/ice_cream/ice_cream_PNG5101.png"
+            imageUrl = "https://pngimg.com/uploads/ice_cream/ice_cream_PNG5101.png",
+            isLimitedTime = true
         ),
         RewardItem(
             id = "2",

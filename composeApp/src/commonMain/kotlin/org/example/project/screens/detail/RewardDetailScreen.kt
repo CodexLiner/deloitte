@@ -1,48 +1,22 @@
 package org.example.project.screens.detail
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.ime
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -50,9 +24,6 @@ import coil3.compose.AsyncImage
 import org.example.project.components.CameraVerificationButton
 import org.example.project.domain.models.DealItem
 
-/*
- * Created by Gopal Meena on 24/05/26
- */
 @Composable
 fun RewardDetailScreen(data: DealItem, navController: NavHostController) {
     var verificationResult by remember { mutableStateOf<String?>(null) }
@@ -104,7 +75,7 @@ fun RewardDetailScreen(data: DealItem, navController: NavHostController) {
                         )
 
                         Button(
-                            onClick = { /* Add to order */ },
+                            onClick = { },
                             modifier = Modifier
                                 .weight(1.2f)
                                 .navigationBarsPadding()
@@ -140,13 +111,13 @@ fun ItemDetails(item: DealItem, paddingValues: PaddingValues) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(250.dp)
+                .height(300.dp)
                 .background(Color(0xFFF5F5F5)),
             contentAlignment = Alignment.Center
         ) {
             AsyncImage(
                 contentDescription = item.title,
-                modifier = Modifier.size(200.dp),
+                modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
                 model = item.imageUrl
             )
@@ -154,17 +125,19 @@ fun ItemDetails(item: DealItem, paddingValues: PaddingValues) {
             Surface(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .size(60.dp),
                 color = Color(0xFFDA291C),
                 shape = CircleShape
             ) {
-                Text(
-                    text = item.priceString,
-                    color = Color.White,
-                    fontWeight = FontWeight.Black,
-                    fontSize = 20.sp,
-                    modifier = Modifier.padding(12.dp)
-                )
+                Box(contentAlignment = Alignment.Center) {
+                    Text(
+                        text = item.priceString,
+                        color = Color.White,
+                        fontWeight = FontWeight.Black,
+                        fontSize = 18.sp
+                    )
+                }
             }
         }
 
@@ -232,7 +205,9 @@ fun DetailsAppBar(
                 text = data.title,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
+                color = Color.Black,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         },
         navigationIcon = {

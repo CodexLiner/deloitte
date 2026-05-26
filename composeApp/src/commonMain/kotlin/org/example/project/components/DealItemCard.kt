@@ -2,16 +2,9 @@ package org.example.project.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
@@ -37,10 +30,8 @@ fun DealItemCard(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .clickable {
-                onClick(item)
-            },
-        shape = RoundedCornerShape(12.dp),
+            .clickable { onClick(item) },
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -48,8 +39,8 @@ fun DealItemCard(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp)
-                    .background(Color(0xFFF5F5F5))
+                    .height(200.dp)
+                    .background(Color(0xFFFCE4EC))
             ) {
                 AsyncImage(
                     model = item.imageUrl,
@@ -60,59 +51,40 @@ fun DealItemCard(
 
                 Surface(
                     modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(12.dp),
+                        .align(Alignment.TopEnd)
+                        .padding(top = 16.dp, end = 16.dp)
+                        .size(64.dp),
                     color = Color(0xFFDA291C),
-                    shape = CircleShape,
-                    shadowElevation = 4.dp
+                    shape = CircleShape
                 ) {
-                    Box(
-                        modifier = Modifier.size(56.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = item.priceString,
-                            color = Color.White,
-                            fontWeight = FontWeight.ExtraBold,
-                            fontSize = 20.sp
-                        )
-                    }
-                }
-
-                if (!item.inStock) {
-                    Surface(
-                        color = Color.Black.copy(alpha = 0.6f),
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Box(contentAlignment = Alignment.Center) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text = "OUT OF STOCK",
+                                text = "$",
                                 color = Color.White,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 18.sp
+                                fontSize = 14.sp,
+                                modifier = Modifier.offset(y = (-4).dp)
+                            )
+                            Text(
+                                text = item.priceString.replace("$", ""),
+                                color = Color.White,
+                                fontWeight = FontWeight.Black,
+                                fontSize = 26.sp
                             )
                         }
                     }
                 }
             }
 
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = item.title,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    color = Color(0xFF27251F),
-                    lineHeight = 20.sp
-                )
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                Text(
-                    text = "Tap to view details",
-                    fontSize = 12.sp,
-                    color = Color.Gray
-                )
-            }
+            Text(
+                text = item.title,
+                modifier = Modifier.padding(16.dp),
+                fontWeight = FontWeight.Bold,
+                fontSize = 15.sp,
+                color = Color(0xFF27251F),
+                lineHeight = 20.sp
+            )
         }
     }
 }

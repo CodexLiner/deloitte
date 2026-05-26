@@ -8,6 +8,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -20,6 +21,28 @@ import platform.objc.*
 import platform.darwin.*
 import kotlinx.cinterop.*
 
+private class CameraDelegate(
+    var itemName: String,
+    var imageUrl: String,
+    var onResult: (Boolean, String) -> Unit
+) : NSObject(), UIImagePickerControllerDelegateProtocol, UINavigationControllerDelegateProtocol {
+    
+    override fun imagePickerController(
+        picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo: Map<Any?, *>
+    ) {
+        val capturedImage = didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage] as? UIImage
+        if (capturedImage != null) {
+            compareImages(capturedImage, imageUrl, itemName, onResult)
+        }
+        picker.dismissViewControllerAnimated(true, null)
+    }
+
+    override fun imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, null)
+    }
+}
+
 @OptIn(ExperimentalForeignApi::class)
 @Composable
 actual fun CameraVerificationButton(
@@ -28,31 +51,22 @@ actual fun CameraVerificationButton(
     modifier: Modifier,
     onResult: (Boolean, String) -> Unit
 ) {
+    val delegate = remember { CameraDelegate(itemName, imageUrl, onResult) }
+    delegate.itemName = itemName
+    delegate.imageUrl = imageUrl
+    delegate.onResult = onResult
+
     Button(
         onClick = {
             val rootViewController = UIApplication.sharedApplication.keyWindow?.rootViewController
             val picker = UIImagePickerController()
-            picker.sourceType = UIImagePickerControllerSourceType.UIImagePickerControllerSourceTypeCamera
-            
-            val delegate = object : NSObject(), UIImagePickerControllerDelegateProtocol, UINavigationControllerDelegateProtocol {
-                override fun imagePickerController(
-                    picker: UIImagePickerController,
-                    didFinishPickingMediaWithInfo: Map<Any?, *>
-                ) {
-                    val capturedImage = didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage] as? UIImage
-                    if (capturedImage != null) {
-                        compareImages(capturedImage, imageUrl, itemName, onResult)
-                    }
-                    picker.dismissViewControllerAnimated(true, null)
-                }
-
-                override fun imagePickerControllerDidCancel(picker: UIImagePickerController) {
-                    picker.dismissViewControllerAnimated(true, null)
-                }
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.UIImagePickerControllerSourceTypeCamera)) {
+                picker.sourceType = UIImagePickerControllerSourceType.UIImagePickerControllerSourceTypeCamera
+                picker.delegate = delegate
+                rootViewController?.presentViewController(picker, animated = true, completion = null)
+            } else {
+                onResult(false, "Camera not available on this device")
             }
-            
-            picker.delegate = delegate
-            rootViewController?.presentViewController(picker, animated = true, completion = null)
         },
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF27251F))
@@ -64,7 +78,10 @@ actual fun CameraVerificationButton(
 
 @OptIn(ExperimentalForeignApi::class)
 private fun compareImages(capturedImage: UIImage, referenceUrl: String, itemName: String, onResult: (Boolean, String) -> Unit) {
-    val url = NSURL.URLWithString(referenceUrl) ?: return
+    val url = NSURL.URLWithString(referenceUrl) ?: run {
+        onResult(false, "Invalid reference image URL")
+        return
+    }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT.toLong(), 0UL)) {
         val data = NSData.dataWithContentsOfURL(url)
@@ -103,7 +120,8 @@ private fun compareImages(capturedImage: UIImage, referenceUrl: String, itemName
             if (fp1 != null && fp2 != null) {
                 val distance = memScoped {
                     val distancePtr = alloc<FloatVar>()
-                    fp1.computeDistance(distancePtr.ptr, fp2, null)
+                    val error = alloc<ObjCObjectVar<NSError?>>()
+                    fp1.computeDistance(distancePtr.ptr, fp2, error.ptr)
                     distancePtr.value
                 }
                 
@@ -121,7 +139,7 @@ private fun compareImages(capturedImage: UIImage, referenceUrl: String, itemName
             }
         } catch (e: Exception) {
             dispatch_async(dispatch_get_main_queue()) {
-                onResult(false, "Comparison error")
+                onResult(false, "Comparison error: ${e.message}")
             }
         }
     }

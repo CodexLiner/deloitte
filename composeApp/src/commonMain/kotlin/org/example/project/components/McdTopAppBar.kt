@@ -1,21 +1,13 @@
 package org.example.project.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.QrCode
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,33 +20,18 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun McdTopAppBar(
     points: Int = 0,
-    showQrIcon: Boolean = true,
-    onQrClick: () -> Unit = {}
+    showQrIcon: Boolean = false,
+    onQrClick: () -> Unit = {},
+    onPointsClick: () -> Unit = {}
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = "My",
-                    color = Color(0xFFDA291C),
-                    fontWeight = FontWeight.Black,
-                    fontSize = 24.sp
-                )
-                Text(
-                    text = "M",
-                    color = Color(0xFFFFC72C),
-                    fontWeight = FontWeight.Black,
-                    fontSize = 32.sp
-                )
-            }
-        },
-        navigationIcon = {
             if (showQrIcon) {
-                IconButton(onClick = onQrClick, modifier = Modifier.padding(start = 8.dp)) {
+                IconButton(onClick = onQrClick) {
                     Box(
                         modifier = Modifier
-                            .size(40.dp)
-                            .background(Color(0xFFFFC72C), RoundedCornerShape(8.dp)),
+                            .size(36.dp)
+                            .background(Color(0xFFFFC72C), RoundedCornerShape(4.dp)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
@@ -67,31 +44,42 @@ fun McdTopAppBar(
                 }
             }
         },
+        navigationIcon = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(start = 16.dp)
+            ) {
+                Text(
+                    text = "My",
+                    color = Color(0xFFDA291C),
+                    fontWeight = FontWeight.Black,
+                    fontSize = 20.sp
+                )
+                Text(
+                    text = "M",
+                    color = Color(0xFFFFC72C),
+                    fontWeight = FontWeight.Black,
+                    fontSize = 28.sp
+                )
+            }
+        },
         actions = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(end = 12.dp)
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .clickable { onPointsClick() }
             ) {
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(
-                        text = "$points",
-                        fontWeight = FontWeight.Black,
-                        fontSize = 18.sp,
-                        color = Color(0xFF27251F),
-                        lineHeight = 18.sp
-                    )
-                    Text(
-                        text = "pts",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 10.sp,
-                        color = Color.Gray,
-                        lineHeight = 10.sp
-                    )
-                }
+                Text(
+                    text = "$points pts",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    color = Color.Black
+                )
                 Icon(
                     imageVector = Icons.Default.ChevronRight,
-                    contentDescription = "Points Details",
-                    tint = Color(0xFF27251F),
+                    contentDescription = "Details",
+                    tint = Color.Black,
                     modifier = Modifier.size(20.dp)
                 )
             }
