@@ -60,6 +60,7 @@ fun RewardDetailScreen(data: DealItem, navController: NavHostController) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .navigationBarsPadding()
                             .padding(16.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                         verticalAlignment = Alignment.CenterVertically
@@ -77,8 +78,7 @@ fun RewardDetailScreen(data: DealItem, navController: NavHostController) {
                         Button(
                             onClick = { },
                             modifier = Modifier
-                                .weight(1.2f)
-                                .navigationBarsPadding()
+                                .weight(1f)
                                 .height(56.dp),
                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFC72C)),
                             shape = RoundedCornerShape(8.dp)
@@ -86,8 +86,8 @@ fun RewardDetailScreen(data: DealItem, navController: NavHostController) {
                             Text(
                                 text = "Add to Order",
                                 color = Color(0xFF27251F),
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 14.sp
                             )
                         }
                     }
