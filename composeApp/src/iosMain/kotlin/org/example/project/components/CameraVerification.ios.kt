@@ -102,47 +102,45 @@ private suspend fun performSemanticComparison(
 
     val targetImage = downloadImage(targetUrl) ?: return Pair(false, "Failed to load target image")
 
-
     val capturedObservations = classifyImage(capturedImage)
     val targetObservations = classifyImage(targetImage)
 
-
+    // Expanded list of generic labels to ignore
     val genericLabels = setOf(
         "food", "dish", "cuisine", "meal", "fast food", "produce",
-        "ingredient", "snack", "junk food", "prepared food", "recipe"
+        "ingredient", "snack", "junk food", "prepared food", "recipe",
+        "tableware", "plate", "bread", "bun", "baked goods", "processed food",
+        "nutrition", "appetizer", "side dish", "delicacy", "meat"
     )
 
-
-    fun getMeaningfulLabels(observations: List<VNClassificationObservation>): Set<String> {
+    fun getMeaningfulLabels(observations: List<VNClassificationObservation>): List<String> {
         return observations.asSequence()
-            .filter { it.confidence >= 0.3f }
+            .filter { it.confidence >= 0.7f } // Increased threshold for higher precision
+            .take(5) // Only look at top classifications
             .flatMap { obs ->
-
                 obs.identifier.lowercase().split(",").map { it.trim() }
             }
             .filter { label ->
-
                 label.length > 2 && genericLabels.none { generic -> label.contains(generic) }
             }
-            .toSet()
+            .distinct()
+            .take(3) // Focus on the most specific meaningful labels
+            .toList()
     }
 
     val capturedLabels = getMeaningfulLabels(capturedObservations)
     val targetLabels = getMeaningfulLabels(targetObservations)
 
-
-    val commonLabels = capturedLabels.intersect(targetLabels)
+    // Match if there is any intersection in the top specific labels
+    val commonLabels = capturedLabels.intersect(targetLabels.toSet())
 
     return if (commonLabels.isNotEmpty()) {
-
         Pair(true, "Match found: ${commonLabels.first()}")
     } else {
-        val detectedText = if (capturedLabels.isNotEmpty()) {
-            "Detected: ${capturedLabels.take(2).joinToString(", ")}"
-        } else {
-            "No specific object detected"
-        }
-        Pair(false, "Mismatch. $detectedText")
+        val capturedText = if (capturedLabels.isNotEmpty()) capturedLabels.joinToString(", ") else "unknown object"
+        val targetText = if (targetLabels.isNotEmpty()) targetLabels.joinToString(", ") else "target object"
+        
+        Pair(false, "Mismatch: Captured ($capturedText) vs Expected ($targetText)")
     }
 }
 
