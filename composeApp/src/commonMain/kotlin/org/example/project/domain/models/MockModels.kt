@@ -13,7 +13,8 @@ data class DealItem(
     val id: String,
     val title: String,
     val priceString: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val inStock : Boolean = false
 )
 
 object MockData {
@@ -66,6 +67,7 @@ object MockData {
         ),
         DealItem(
             id = "d2",
+            inStock = true,
             title = "Double Stack",
             priceString = "$18",
             imageUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349?w=800"

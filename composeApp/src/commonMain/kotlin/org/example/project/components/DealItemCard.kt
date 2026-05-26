@@ -1,6 +1,7 @@
 package org.example.project.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,11 +27,15 @@ import org.example.project.domain.models.DealItem
 @Composable
 fun DealItemCard(
     item: DealItem,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick : (DealItem) -> Unit
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
+            .clickable {
+                if (item.inStock) onClick(item)
+            }
             .padding(horizontal = 16.dp, vertical = 8.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),

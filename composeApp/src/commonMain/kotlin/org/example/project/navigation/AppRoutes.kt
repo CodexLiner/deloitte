@@ -8,5 +8,8 @@ sealed interface Screens {
     data object RewardsScreen : Screens
 
     @Serializable
+    data class StackDetails(val data : String) : Screens
+
+    @Serializable
     data object AllRewardsScreen : Screens
 }

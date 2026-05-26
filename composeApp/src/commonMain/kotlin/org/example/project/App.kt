@@ -5,7 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import kotlinx.serialization.json.Json
 import org.example.project.navigation.Screens
+import org.example.project.screens.detail.RewardDetailScreen
 import org.example.project.screens.rewards.AllRewardsScreen
 import org.example.project.screens.rewards.RewardsScreen
 
@@ -19,7 +22,7 @@ fun ProductBrowserApp() {
             startDestination = Screens.RewardsScreen
         ) {
             composable<Screens.RewardsScreen> {
-                RewardsScreen(onViewAllRewards = {
+                RewardsScreen(navController = navController, onViewAllRewards = {
                     navController.navigate(Screens.AllRewardsScreen)
                 })
             }
@@ -27,6 +30,16 @@ fun ProductBrowserApp() {
                 AllRewardsScreen(onBack = {
                     navController.popBackStack()
                 })
+            }
+
+            composable<Screens.StackDetails> {
+
+                val data = it.toRoute<Screens.StackDetails>().data
+                data = Json.decodeFromString(data)
+
+
+
+                RewardDetailScreen(data , navController)
             }
         }
     }

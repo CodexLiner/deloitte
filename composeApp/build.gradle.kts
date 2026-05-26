@@ -32,6 +32,7 @@ kotlin {
             implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
             implementation(libs.koin.core)
             implementation(projects.common.models)
             implementation(libs.kotlinx.coroutines.core)

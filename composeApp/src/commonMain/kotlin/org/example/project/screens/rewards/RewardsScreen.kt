@@ -36,10 +36,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import org.example.project.components.DealItemCard
 import org.example.project.components.EndOfListFooter
 import org.example.project.components.FilterChipsRow
-import org.example.project.components.HowItWorksCard
 import org.example.project.components.McdBottomNavBar
 import org.example.project.components.McdTopAppBar
 import org.example.project.components.PromoBannerCard
@@ -47,10 +47,12 @@ import org.example.project.components.QrCodeCard
 import org.example.project.components.RewardItemCard
 import org.example.project.components.SectionHeader
 import org.example.project.domain.models.MockData
+import org.example.project.navigation.Screens
 
 @Composable
 fun RewardsScreen(
-    onViewAllRewards: () -> Unit = {}
+    onViewAllRewards: () -> Unit = {},
+    navController: NavController
 ) {
     var selectedFilter by remember { mutableStateOf("Deals") }
     val listState = rememberLazyListState()
@@ -157,7 +159,9 @@ fun RewardsScreen(
             }
 
             items(MockData.dealItems) { deal ->
-                DealItemCard(item = deal)
+                DealItemCard(item = deal) {
+                    navController.navigate(Screens.StackDetails(it.toString()))
+                }
             }
 
             item {
