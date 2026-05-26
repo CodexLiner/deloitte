@@ -1,9 +1,11 @@
 package org.example.project.screens.detail
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +30,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
+import org.example.project.components.CameraVerificationButton
 import org.example.project.domain.models.DealItem
 
 /*
@@ -45,6 +52,9 @@ import org.example.project.domain.models.DealItem
  */
 @Composable
 fun RewardDetailScreen(data: DealItem, navController: NavHostController) {
+    var verificationResult by remember { mutableStateOf<String?>(null) }
+    var isVerified by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             DetailsAppBar(data = data) {
@@ -52,26 +62,60 @@ fun RewardDetailScreen(data: DealItem, navController: NavHostController) {
             }
         },
         bottomBar = {
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shadowElevation = 8.dp,
-                color = Color.White
-            ) {
-                Button(
-                    onClick = { /* Add to order */ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                        .height(56.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFC72C)),
-                    shape = RoundedCornerShape(8.dp)
+            Column {
+                if (verificationResult != null) {
+                    Surface(
+                        color = if (isVerified) Color(0xFFE8F5E9) else Color(0xFFFFEBEE),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = verificationResult!!,
+                            modifier = Modifier.padding(16.dp),
+                            color = if (isVerified) Color(0xFF2E7D32) else Color(0xFFC62828),
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shadowElevation = 8.dp,
+                    color = Color.White
                 ) {
-                    Text(
-                        text = "Add to Order",
-                        color = Color(0xFF27251F),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
-                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CameraVerificationButton(
+                            itemName = data.title,
+                            imageUrl = data.imageUrl,
+                            modifier = Modifier.weight(1f),
+                            onResult = { success, message ->
+                                isVerified = success
+                                verificationResult = message
+                            }
+                        )
+
+                        Button(
+                            onClick = { /* Add to order */ },
+                            modifier = Modifier
+                                .weight(1.2f)
+                                .height(56.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFC72C)),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(
+                                text = "Add to Order",
+                                color = Color(0xFF27251F),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 16.sp
+                            )
+                        }
+                    }
                 }
             }
         },
