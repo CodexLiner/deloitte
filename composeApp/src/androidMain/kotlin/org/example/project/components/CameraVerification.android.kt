@@ -11,7 +11,4 @@ actual fun CameraVerificationButton(
     imageUrl: String,
     modifier: Modifier,
     onResult: (Boolean, String) -> Unit
-) {
-    // Android implementation not requested or handled differently
-    Text("Camera scanning only available on iOS", color = Color.Gray, modifier = modifier)
-}
+) = Unit
