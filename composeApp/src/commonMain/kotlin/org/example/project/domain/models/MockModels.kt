@@ -1,5 +1,8 @@
 package org.example.project.domain.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class RewardItem(
     val id: String,
     val name: String,
@@ -9,6 +12,7 @@ data class RewardItem(
     val isAvailable: Boolean = true
 )
 
+@Serializable
 data class DealItem(
     val id: String,
     val title: String,

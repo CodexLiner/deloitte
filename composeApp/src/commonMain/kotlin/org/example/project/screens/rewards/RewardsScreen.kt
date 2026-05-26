@@ -1,6 +1,7 @@
 package org.example.project.screens.rewards
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,6 +38,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.example.project.components.DealItemCard
 import org.example.project.components.EndOfListFooter
 import org.example.project.components.FilterChipsRow
@@ -98,41 +101,44 @@ fun RewardsScreen(
                 LazyRow(
                     modifier = Modifier.fillMaxWidth(),
                     contentPadding = PaddingValues(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     items(MockData.rewardItems) { reward ->
                         RewardItemCard(
                             item = reward,
-                            modifier = Modifier.width(180.dp)
+                            modifier = Modifier.width(160.dp)
                         )
                     }
                     item {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center,
-                            modifier = Modifier.padding(horizontal = 8.dp)
+                            modifier = Modifier
+                                .width(100.dp)
+                                .padding(horizontal = 8.dp)
                                 .clickable { onViewAllRewards() }
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .size(50.dp)
+                                    .size(60.dp)
                                     .clip(CircleShape)
-                                    .background(Color(0xFFFFC72C)),
+                                    .background(Color(0xFFF8F8F8))
+                                    .border(1.dp, Color(0xFFEEEEEE), CircleShape),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                                     contentDescription = "View all",
-                                    tint = Color.Black
+                                    tint = Color(0xFFDA291C)
                                 )
                             }
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
                                 text = "View all",
                                 fontSize = 12.sp,
-                                fontWeight = FontWeight.Medium,
-                                color = Color.DarkGray
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF27251F)
                             )
                         }
                     }
@@ -160,7 +166,8 @@ fun RewardsScreen(
 
             items(MockData.dealItems) { deal ->
                 DealItemCard(item = deal) {
-                    navController.navigate(Screens.StackDetails(it.toString()))
+                    val dealJson = Json.encodeToString(it)
+                    navController.navigate(Screens.StackDetails(dealJson))
                 }
             }
 
